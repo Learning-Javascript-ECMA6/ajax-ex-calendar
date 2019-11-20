@@ -18,8 +18,9 @@ Evidenziare le festività nella lista
 //funzione generale jquery
 $( document ).ready(function() {
 
-giorniDelMese();
-festeDelMese()
+ giorniDelMese();
+ festeDelMese()
+
  });
 
 // funzione per generare i giorni del mese con moment e ciclo for
