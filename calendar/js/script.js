@@ -15,25 +15,16 @@ Chiedere all’api quali sono le festività per il mese ;
 Evidenziare le festività nella lista
 */
 
-//funzione generale jquery
-$( document ).ready(function() {
-
- giorniDelMese();
- festeDelMese()
-
- });
-
 // funzione per generare i giorni del mese con moment e ciclo for
 function giorniDelMese() {
- var date = moment('01/12/2018','DD/MMMM/YYYY').format('DD MMMM YYYY');
- console.log(date);
 
- var numeroDigiorni = moment ('01/12/2018','DD/MMMM/YYYY').daysInMonth();
+ var numeroDigiorni = moment ('2018/01/01','YYYY-MM-DD').daysInMonth();
  console.log("numero di giorni del mese : " + numeroDigiorni);
 
- for (var i = 0; i < numeroDigiorni; i++) {
-  var currentDay = moment('2018-01-'+ i ).format('DD MMMM YYYY');
-  $('.content').append('<div>' + currentDay + '</div>')
+ for (var i = 1; i < numeroDigiorni; i++) {
+  var currentDate = moment('2018-01-'+i, 'YYYY-MM-D').format('YYYY-MM-DD');
+  var currentDay = moment(currentDate).format('DD dddd Y');
+  $('.content').append('<div data-date="'+currentDate+'">'+currentDay+'</div>')
   console.log("lista giorni del mese di gennaio : " + currentDay);
  }
 }
@@ -45,13 +36,22 @@ function festeDelMese() {
  method : "GET",
  success : function (lista) {
   for (var i = 0; i < lista.response.length; i++) {
-   console.log(lista.response[i]);
+   var giorniFestivi = lista.response[i].date;
+   var giorniColorati = lista.response[i].name;
+   console.log(giorniFestivi);
+   $('.content div[ data-date = "' + giorniFestivi + '"] ').css('color', 'red').append('' + giorniColorati);
   }
  },
 
  error : function () {
-  alert("E' avvenuto un errore. "+errore);
+  alert("Errore");
  }
 
  });
 }
+
+//funzione generale jquery
+$( document ).ready(function() {
+ giorniDelMese();
+ festeDelMese()
+ });
