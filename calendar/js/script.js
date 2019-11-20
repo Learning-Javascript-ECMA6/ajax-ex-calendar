@@ -24,7 +24,7 @@ function giorniDelMese() {
  for (var i = 1; i < numeroDigiorni; i++) {
   var currentDate = moment('2018-01-'+i, 'YYYY-MM-D').format('YYYY-MM-DD');
   var currentDay = moment(currentDate).format('DD dddd Y');
-  $('.content').append('<div data-date="'+currentDate+'">'+currentDay+'</div>')
+  $('.main').append('<div data-date="'+currentDate+'">'+currentDay+'</div>')
   console.log("lista giorni del mese di gennaio : " + currentDay);
  }
 }
@@ -39,7 +39,7 @@ function festeDelMese() {
    var giorniFestivi = lista.response[i].date;
    var giorniColorati = lista.response[i].name;
    console.log(giorniFestivi);
-   $('.content div[ data-date = "' + giorniFestivi + '"] ').css('color', 'red').append('' + giorniColorati);
+   $('.main div[ data-date = "' + giorniFestivi + '"] ').css('color', 'red').append('' + giorniColorati);
   }
  },
 
