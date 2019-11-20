@@ -19,7 +19,7 @@ Evidenziare le festività nella lista
 $( document ).ready(function() {
 
 giorniDelMese();
-
+festeDelMese()
  });
 
 // funzione per generare i giorni del mese con moment e ciclo for
@@ -35,4 +35,22 @@ function giorniDelMese() {
   $('.content').append('<div>' + currentDay + '</div>')
   console.log("lista giorni del mese di gennaio : " + currentDay);
  }
+}
+
+//richiesta api per trovare festività
+function festeDelMese() {
+  $.ajax({
+ url : "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
+ method : "GET",
+ success : function (lista) {
+  for (var i = 0; i < lista.response.length; i++) {
+   console.log(lista.response[i]);
+  }
+ },
+
+ error : function () {
+  alert("E' avvenuto un errore. "+errore);
+ }
+
+ });
 }
