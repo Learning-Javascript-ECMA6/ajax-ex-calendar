@@ -50,8 +50,39 @@ function festeDelMese() {
  });
 }
 
+
+var mese = 1;
+giorniDelMese(mese);
+
+$("#btn-ava").click(function () {
+ if (mese == 1){
+  mese = 12;
+  $('div[ data-date] ').remove();
+  giorniDelMese(mese);
+ }else{
+  mese--;
+  $('div[ data-date] ').remove();
+  giorniDelMese(mese);
+ }
+})
+
+$("#btn-ind").click (function () {
+ if (mese == 12){
+  mese = 1;
+  $('div[ data-date] ').remove();
+  giorniDelMese(mese);
+ }else{
+  mese ++;
+  $('div[ data-date] ').remove();
+  giorniDelMese(mese);
+ }
+})
+
+
+
+
 //funzione generale jquery
 $( document ).ready(function() {
  giorniDelMese();
- festeDelMese()
+ festeDelMese();
  });
