@@ -40,11 +40,12 @@
  background: #4E8397;
 }
 
-h4{
+#mese-now{
  margin-top:10px;
  color:#D5CABD;
- font-size: 20px;
+ font-size: 30px;
 }
+
 /* bottoni */
 #btn-ind, #btn-ava{
  padding: 13px;

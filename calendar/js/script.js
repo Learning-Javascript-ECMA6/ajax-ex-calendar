@@ -6,33 +6,27 @@ Controllare se il mese è valido (per ovviare al problema che l’API non carich
 Controllare quanti giorni ha il mese scelto formando così una lista
 Chiedere all’api quali sono le festività per il mese scelto
 Evidenziare le festività nella lista
-
-MILESTONE DA FARE OGGI:
-stampare SOLO gennaio 2018 con caratterizzazione delle relative festività, recuperate interrogando l’API
- STEP:
-Controllare quanti giorni ha il mese  formando così una lista;
-Chiedere all’api quali sono le festività per il mese ;
-Evidenziare le festività nella lista
 */
 
 // funzione per generare i giorni del mese con moment e ciclo for
-function giorniDelMese() {
+function giorniDelMese(mese) {
 
- var numeroDigiorni = moment ('2018/01/01','YYYY-MM-DD').daysInMonth();
- console.log("numero di giorni del mese : " + numeroDigiorni);
+ var numeroDigiorni = moment ('2018/'+mese+'/01','YYYY/MM/DD').daysInMonth();
 
  for (var i = 1; i < numeroDigiorni; i++) {
-  var currentDate = moment('2018-01-'+i, 'YYYY-MM-D').format('YYYY-MM-DD');
+  var data = '2019-05-10-'
+  var currentDate = moment('2018-'+mese+'-'+i, 'YYYY-MM-D').format('YYYY-MM-DD');
   var currentDay = moment(currentDate).format('DD dddd Y');
   $('.main').append('<div data-date="'+currentDate+'">'+currentDay+'</div>')
-  console.log("lista giorni del mese di gennaio : " + currentDay);
+  $("#mese-now").text(moment(mese, "M").format("MMMM"));
  }
 }
 
 //richiesta api per trovare festività
-function festeDelMese() {
+function festeDelMese(mese) {
+ var meseAjax = mese - 1;
   $.ajax({
- url : "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
+ url : "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=" + meseAjax,
  method : "GET",
  success : function (lista) {
   for (var i = 0; i < lista.response.length; i++) {
@@ -51,38 +45,39 @@ function festeDelMese() {
 }
 
 
-var mese = 1;
-giorniDelMese(mese);
-
-$("#btn-ava").click(function () {
- if (mese == 1){
-  mese = 12;
-  $('div[ data-date] ').remove();
-  giorniDelMese(mese);
- }else{
-  mese--;
-  $('div[ data-date] ').remove();
-  giorniDelMese(mese);
- }
-})
-
-$("#btn-ind").click (function () {
- if (mese == 12){
-  mese = 1;
-  $('div[ data-date] ').remove();
-  giorniDelMese(mese);
- }else{
-  mese ++;
-  $('div[ data-date] ').remove();
-  giorniDelMese(mese);
- }
-})
+//funzione per far andare avanti e indietro i bottoni togliendo le festività
 
 
 
 
 //funzione generale jquery
 $( document ).ready(function() {
- giorniDelMese();
- festeDelMese();
+ var mese = 1;
+ festeDelMese(mese);
+ giorniDelMese(mese);
+
+ $("#btn-ind").click(function () {
+  if (mese == 1){
+   mese = 12;
+   $('div[ data-date] ').remove();
+   giorniDelMese(mese);
+  }else{
+   mese--;
+   $('div[ data-date] ').remove();
+   giorniDelMese(mese);
+  }
+ })
+
+ $("#btn-ava").click (function () {
+  if (mese == 12){
+   mese = 1;
+   $('div[ data-date] ').remove();
+   giorniDelMese(mese);
+  }else{
+   mese ++;
+   $('div[ data-date] ').remove();
+   giorniDelMese(mese);
+  }
+ })
+
  });
