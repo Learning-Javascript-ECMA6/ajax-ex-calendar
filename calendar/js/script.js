@@ -8,7 +8,7 @@ Chiedere all’api quali sono le festività per il mese scelto
 Evidenziare le festività nella lista
 */
 
-// funzione per generare i giorni del mese con moment e ciclo for
+//
 function giorniDelMese(mese) {
 
  var numeroDigiorni = moment ('2018/'+mese+'/01','YYYY/MM/DD').daysInMonth();
@@ -22,7 +22,7 @@ function giorniDelMese(mese) {
  }
 }
 
-//richiesta api per trovare festività
+//chiamata divina api
 function festeDelMese(mese) {
  var meseAjax = mese - 1;
   $.ajax({
@@ -32,7 +32,7 @@ function festeDelMese(mese) {
   for (var i = 0; i < lista.response.length; i++) {
    var giorniFestivi = lista.response[i].date;
    var giorniColorati = lista.response[i].name;
-   $('.main div[ data-date = "' + giorniFestivi + '"] ').css('color', 'red').append('' + giorniColorati);
+   $('.main div[ data-date = "' + giorniFestivi + '"] ').css('color', '#e34098').append('' + giorniColorati);
   }
  },
 
@@ -46,18 +46,21 @@ function festeDelMese(mese) {
 //funzione generale jquery
 $( document ).ready(function() {
  var mese = 1;
- festeDelMese(mese);
  giorniDelMese(mese);
+ festeDelMese(mese);
+
 
  $("#btn-ind").click(function () {
   if (mese == 1){
    mese = 12;
    $('div[ data-date] ').remove();
    giorniDelMese(mese);
+   festeDelMese(mese);
   }else{
    mese--;
    $('div[ data-date] ').remove();
    giorniDelMese(mese);
+   festeDelMese(mese);
   }
  })
 
@@ -66,10 +69,12 @@ $( document ).ready(function() {
    mese = 1;
    $('div[ data-date] ').remove();
    giorniDelMese(mese);
+   festeDelMese(mese);
   }else{
    mese ++;
    $('div[ data-date] ').remove();
    giorniDelMese(mese);
+   festeDelMese(mese);
   }
  })
 

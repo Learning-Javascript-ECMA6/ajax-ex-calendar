@@ -22,15 +22,6 @@
 }
 
 /* nav calendario */
-.titolo{
- text-align: center;
- padding-top: 10px;
- font-family: monospace;
- font-size: 20px;
- background: #4E8397;
- color: #D5CABD;
-}
-
 .nav{
  flex-basis: 15%;
  padding: 20px 20px;
@@ -41,8 +32,7 @@
 }
 
 #mese-now{
- margin-top:10px;
- color:#D5CABD;
+ color:#baad9e;
  font-size: 30px;
 }
 
@@ -69,4 +59,5 @@ i{
  flex-basis: 85%;
  text-align: center;
  overflow-y: auto;
+ color: #154557;
 }
