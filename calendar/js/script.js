@@ -32,7 +32,6 @@ function festeDelMese(mese) {
   for (var i = 0; i < lista.response.length; i++) {
    var giorniFestivi = lista.response[i].date;
    var giorniColorati = lista.response[i].name;
-   console.log(giorniFestivi);
    $('.main div[ data-date = "' + giorniFestivi + '"] ').css('color', 'red').append('' + giorniColorati);
   }
  },
@@ -43,12 +42,6 @@ function festeDelMese(mese) {
 
  });
 }
-
-
-//funzione per far andare avanti e indietro i bottoni togliendo le festività
-
-
-
 
 //funzione generale jquery
 $( document ).ready(function() {
